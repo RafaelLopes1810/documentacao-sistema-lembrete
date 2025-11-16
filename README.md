@@ -26,6 +26,6 @@ Este repositório inclui, entre outros artefatos:
 
 ## 🔗 Repositório do Código-Fonte
 
-O código completo do sistema (frontend, backend e testes) pode ser encontrado aqui:
+O código e a documentação completa do sistema (frontend, backend e testes) pode ser encontrado aqui:
 
 👉 **https://github.com/RafaelLopes1810/sistema-de-lembrete**
