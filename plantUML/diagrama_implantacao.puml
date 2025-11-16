@@ -1,0 +1,29 @@
+@startuml diagrama_implantacao
+skinparam nodeStyle rectangle
+
+node "Navegador do Usuário" as Browser {
+  artifact "App React (HTML/JS/CSS)" as SPA
+}
+
+node "Servidor de Arquivos / CDN" as CDN {
+  SPA -down-> Browser : envia arquivos
+}
+
+node "Load Balancer / Proxy" as LB
+
+node "Servidor Backend" as Backend {
+  component "API ASP.NET Core" as API
+}
+
+node "Banco SQL Server" as SQL
+
+node "Pipeline CI/CD" as CICD
+
+Browser --> LB : requisições HTTP/HTTPS
+LB --> Backend : encaminha requisições
+Backend --> SQL : porta 1433
+CICD --> CDN : deploy do frontend
+CICD --> Backend : deploy do backend
+CICD --> SQL : migrations (opcional)
+
+@enduml

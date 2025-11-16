@@ -1,0 +1,43 @@
+@startuml diagrama_componentes
+skinparam componentStyle rectangle
+
+package "Frontend (React)" {
+  [App]
+  [ListaLembretes]
+  [ModalCriarLembrete]
+
+  App --> ListaLembretes : usa
+  App --> ModalCriarLembrete : usa
+}
+
+package "Backend (ASP.NET Core)" {
+  [LembreteController]
+  [Services]
+  [LembreteRepository]
+  [AppDbContext]
+  [DTOs]
+  [Models]
+
+  LembreteController --> Services
+  Services --> LembreteRepository
+  LembreteRepository --> AppDbContext
+  LembreteRepository --> Models
+  LembreteController --> DTOs
+}
+
+package "Testes" {
+  [Backend.Tests]
+  [Frontend.Tests]
+
+  Backend.Tests --> LembreteController
+  Frontend.Tests --> App
+}
+
+package "Banco de Dados" {
+  database "SQL Server" as SQL
+  AppDbContext --> SQL
+}
+
+App --> LembreteController : API REST (JSON)
+
+@enduml

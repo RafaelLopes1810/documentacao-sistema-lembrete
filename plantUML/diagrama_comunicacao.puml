@@ -1,0 +1,30 @@
+@startuml diagrama_comunicacao
+' Communication Diagram (Collaboration)
+
+skinparam sequenceMessageAlign center
+
+object Usuario
+object Sistema
+object UsuarioService
+object LembreteService
+object Repositorio
+
+' Login
+Usuario -> Sistema : 1: efetuarLogin(email, senha)
+Sistema -> UsuarioService : 2: validarCredenciais()
+UsuarioService --> Sistema : 3: sucesso
+
+' Criar Lembrete
+Usuario -> Sistema : 4: criarLembrete(titulo, desc, data)
+Sistema -> LembreteService : 5: montarObjetoLembrete()
+LembreteService -> Repositorio : 6: salvarLembrete()
+Repositorio --> LembreteService : 7: OK
+LembreteService --> Sistema : 8: OK
+
+' Listar Lembretes
+Usuario -> Sistema : 9: listarLembretes()
+Sistema -> Repositorio : 10: obterLembretes()
+Repositorio --> Sistema : 11: lista
+Sistema --> Usuario : 12: retorna lista
+
+@enduml

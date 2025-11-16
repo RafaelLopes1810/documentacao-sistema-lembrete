@@ -1,0 +1,28 @@
+@startuml diagrama_classes
+skinparam classAttributeIconSize 0
+
+class Usuario {
+    - nome : string
+    - email : string
+    - senha : string
+    - lembretes : List<Lembrete>
+
+    + adicionarLembrete(l : Lembrete)
+    + cancelarLembrete(l : Lembrete)
+    + efetuarLogin(email : string, senha : string)
+    + listarLembretes() : List<Lembrete>
+}
+
+class Lembrete {
+    - titulo : string
+    - descricao : string
+    - data : Date
+
+    + criar()
+    + editar()
+    + deletar()
+}
+
+Usuario "1" --> "*" Lembrete : possui >
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml seq_visualizar_lembretes
+actor Usuario
+participant UI
+participant API
+participant ReminderService as Service
+participant ReminderRepository as Repo
+
+Usuario -> UI: Abrir listagem
+UI -> API: GET /reminders
+API -> Service: listUpcoming()
+Service -> Repo: findUpcoming(today)
+Repo --> Service: lista de lembretes
+Service -> Service: ordenar por data asc
+Service --> API: lista ordenada
+API --> UI: Exibir lista
+@enduml

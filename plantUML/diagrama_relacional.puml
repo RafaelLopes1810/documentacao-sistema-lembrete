@@ -1,0 +1,25 @@
+@startuml diagrama_relacional
+' Diagrama Relacional - Modelo Lógico
+
+skinparam rectangleStyle rounded
+
+entity Usuario {
+  + id : int <<PK>>
+  --
+  nome : varchar(150)
+  email : varchar(150)
+  senha : varchar(200)
+}
+
+entity Lembrete {
+  + id : int <<PK>>
+  --
+  titulo : varchar(200)
+  descricao : text
+  data : datetime
+  usuario_id : int <<FK>>
+}
+
+Usuario ||--o{ Lembrete : FK usuario_id
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml diagrama_estados
+
+[*] --> Criando
+
+Criando : usuario define titulo, descricao e data
+Criando --> Agendado : salvar()
+
+Agendado : lembrete ativo aguardando data
+Agendado --> Editando : editar()
+
+Editando : usuario altera dados
+Editando --> Agendado : salvarAlteracoes()
+
+Agendado --> Expirado : data < hoje
+
+Agendado --> Deletado : deletar()
+Editando --> Deletado : deletar()
+
+Expirado : lembrete nao aparece mais na listagem
+Expirado --> Deletado : deletar()
+
+Deletado : lembrete removido
+
+@enduml

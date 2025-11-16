@@ -1,0 +1,16 @@
+@startuml seq_login
+actor Usuario
+participant UI
+participant API
+participant AuthService as Service
+participant UserRepository as Repo
+
+Usuario -> UI: Digitar email e senha
+UI -> API: POST /login {email, senha}
+API -> Service: validarCredenciais(email, senha)
+Service -> Repo: findUserByEmail(email)
+Repo --> Service: dados do usuário
+Service -> Service: validar senha
+Service --> API: resultado (sucesso ou erro)
+API --> UI: exibir mensagem (login ok / falhou)
+@enduml

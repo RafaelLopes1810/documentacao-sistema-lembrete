@@ -1,0 +1,37 @@
+@startuml arquitetura_c4
+' C4-like diagram without remote include
+
+' Appearance
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam ArrowFontSize 11
+skinparam defaultFontSize 12
+
+' Actor
+actor "Usuário" as Usuario
+
+' System boundary
+rectangle "Sistema de Lembretes" as Sistema {
+  rectangle "Frontend Web\n(React + Vite)\n(frontend/)" as Frontend
+  rectangle "Backend API\n(ASP.NET Core)\n(backend/)" as Backend
+  database "Banco de Dados\n(EF Core / Migrations)\n(backend/Data)" as DB
+}
+
+' Relationships
+Usuario --> Frontend : Acessa via navegador (HTTP)
+Frontend --> Backend : HTTP (REST) - CRUD de lembretes
+Backend --> DB : Persistência e consultas (EF Core)
+
+' Anotações
+note right of Frontend
+  - Apresenta lista de lembretes
+  - Formulários de criar/editar
+end note
+
+note left of Backend
+  - Controllers (LembreteController)
+  - Services / Repositories
+  - DTOs e validações
+end note
+
+@enduml

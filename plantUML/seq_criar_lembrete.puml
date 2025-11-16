@@ -1,0 +1,16 @@
+@startuml seq_criar_lembrete
+actor Usuario
+participant UI
+participant API
+participant ReminderService as Service
+participant ReminderRepository as Repo
+
+Usuario -> UI: Preencher título, descrição, data
+UI -> API: POST /reminder {dados}
+API -> Service: createReminder(dados)
+Service -> Service: validar data >= hoje
+Service -> Repo: save(reminder)
+Repo --> Service: confirmar gravação
+Service --> API: 201 Created
+API --> UI: Exibir confirmação
+@enduml

@@ -1,0 +1,28 @@
+@startuml diagrama_casos_uso
+' Layout left-to-right para melhor leitura
+left to right direction
+
+' Definição do ator
+actor "Usuário" as Usuario
+
+' Casos de uso
+usecase "Fazer login" as UC_Login
+usecase "Criar lembrete" as UC_Criar
+usecase "Visualizar lembretes" as UC_Visualizar
+usecase "Editar lembrete" as UC_Editar
+usecase "Excluir lembrete" as UC_Excluir
+
+' Ligações entre ator e casos de uso
+Usuario -- UC_Login
+Usuario -- UC_Criar
+Usuario -- UC_Visualizar
+Usuario -- UC_Editar
+Usuario -- UC_Excluir
+
+' Observações / regras de negócio (opcional: exibidas como notas)
+note right of UC_Visualizar
+  - Lista mostra apenas lembretes com data >= hoje
+  - Ordena por data mais próxima
+end note
+
+@enduml
